@@ -1,0 +1,30 @@
+<!-- /views/index.ejs -->
+<!DOCTYPE html>
+<html lang="ko">
+<%- include('layout'); %>
+<body>
+  <div class="container">
+    <!-- 드래그 앤 드롭 영역 -->
+    <div id="drag-drop-area" class="card-panel">
+      <i class="material-icons">cloud_upload</i>
+      <p>여기로 파일을 드래그 앤 드롭하세요</p>
+      <form id="upload-form" action="/upload" method="POST" enctype="multipart/form-data">
+        <input type="file" id="file-input" name="file" style="display: none;" multiple>
+        <button type="button" id="upload-btn" class="btn">업로드</button>
+      </form>
+    </div>
+
+    <!-- 비밀키로 파일 조회 -->
+    <form action="/files" method="POST">
+      <div class="input-field">
+        <input type="text" id="searchKey" name="searchKey" required>
+        <label for="searchKey">비밀키로 파일 찾기</label>
+      </div>
+      <button type="submit" class="btn">검색</button>
+    </form>
+  </div>
+
+  <!-- 스크립트 -->
+  <script src="/js/main.js"></script>
+</body>
+</html>

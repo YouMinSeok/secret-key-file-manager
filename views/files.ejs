@@ -1,0 +1,24 @@
+<!-- /views/files.ejs -->
+<!DOCTYPE html>
+<html lang="ko">
+<%- include('layout'); %>
+<body>
+  <div class="container">
+    <h4>파일 목록</h4>
+    <ul class="collection">
+      <% files.forEach(function(file) { %>
+        <li class="collection-item">
+          <div class="file-item">
+            <div class="file-info">
+              <i class="material-icons">insert_drive_file</i>
+              <span><%= file.originalname %></span>
+            </div>
+            <a href="/files/download/<%= file._id %>" class="btn-small">다운로드</a>
+          </div>
+        </li>
+      <% }); %>
+    </ul>
+    <a href="/" class="btn">메인 페이지로 이동</a>
+  </div>
+</body>
+</html>

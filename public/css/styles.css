@@ -1,0 +1,53 @@
+/* /public/css/styles.css */
+
+body {
+    padding-top: 50px;
+  }
+  
+  #drag-drop-area {
+    border: 3px dashed #aaa;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    padding: 60px;
+    text-align: center;
+    cursor: pointer;
+    margin-bottom: 30px;
+    transition: background 0.3s, border-color 0.3s;
+  }
+  
+  #drag-drop-area.dragging {
+    background: linear-gradient(135deg, #dce35b 0%, #45b649 100%);
+    border-color: #45b649;
+  }
+  
+  #drag-drop-area i {
+    font-size: 64px;
+    color: #45b649;
+  }
+  
+  #drag-drop-area p {
+    font-size: 20px;
+    color: #333;
+  }
+  
+  /* 파일 목록 스타일 개선 */
+  .file-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .file-info {
+    display: flex;
+    align-items: center;
+  }
+  
+  .file-info i.material-icons {
+    margin-right: 10px;
+  }
+  
+  /* 컬렉션 아이템 패딩 추가 */
+  .collection .collection-item {
+    padding: 10px 0;
+  }
+  
