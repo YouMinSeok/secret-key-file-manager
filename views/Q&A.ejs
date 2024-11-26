@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko">
+<%- include('layout'); %>
+<body>
+  <div id="wrap">
+    <main>
+      <div id="Questionsection">
+        <div id="Question">
+          <p>파일 관리</p>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>번호</th>
+                <th>파일 이름</th>
+                <th>다운로드</th>
+                <th>업로드 날짜</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% files.forEach((file, index) => { %>
+                <tr>
+                  <td><%= index + 1 %></td>
+                  <td><%= file.originalname %></td>
+                  <td><a href="/files/download/<%= file._id %>">다운로드</a></td>
+                  <td><%= new Date(file.uploadDate).toLocaleDateString('ko-KR') %></td>
+                </tr>
+              <% }); %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

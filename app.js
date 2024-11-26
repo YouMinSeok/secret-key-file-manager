@@ -1,5 +1,3 @@
-// app.js
-
 require('dotenv').config(); // 환경 변수 로드
 
 const express = require('express');
@@ -29,27 +27,26 @@ if (!fs.existsSync(uploadDir)) {
 }
 
 // MongoDB 연결
-mongoose.connect(process.env.MONGODB_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
-
-const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'MongoDB 연결 에러:'));
-db.once('open', () => {
-  console.log('MongoDB에 연결되었습니다.');
-});
+mongoose.connect(process.env.MONGODB_URI)
+  .then(() => {
+    console.log('MongoDB에 연결되었습니다.');
+  })
+  .catch((error) => {
+    console.error('MongoDB 연결 에러:', error);
+  });
 
 // 라우터 설정
 const indexRouter = require('./routes/index');
 const uploadRouter = require('./routes/upload');
 const filesRouter = require('./routes/files');
-const assignKeyRouter = require('./routes/assignKey'); // 새로 추가
+const assignKeyRouter = require('./routes/assignKey');
+const QARouter = require('./routes/Q&A'); // Q&A 라우터 추가
 
-app.use('/', indexRouter);
-app.use('/upload', uploadRouter);
-app.use('/files', filesRouter);
-app.use('/assign-key', assignKeyRouter); // 새로 추가
+app.use('/', indexRouter); // 메인 페이지
+app.use('/upload', uploadRouter); // 파일 업로드
+app.use('/files', filesRouter); // 파일 조회 및 다운로드
+app.use('/assign-key', assignKeyRouter); // 비밀키 할당
+app.use('/Q&A', QARouter); // Q&A 경로를 명확히 설정
 
 // 서버 실행
 app.listen(PORT, () => {
