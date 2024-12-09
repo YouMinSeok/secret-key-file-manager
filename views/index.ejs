@@ -1,4 +1,3 @@
-<!-- /views/index.ejs -->
 <!DOCTYPE html>
 <html lang="ko">
 <%- include('layout'); %>
@@ -9,7 +8,8 @@
       <i class="material-icons">cloud_upload</i>
       <p>여기로 파일을 드래그 앤 드롭하세요</p>
       <form id="upload-form" action="/upload" method="POST" enctype="multipart/form-data">
-        <input type="file" id="file-input" name="file" style="display: none;" multiple>
+        <!-- input 태그에서 파일 확장자 제한 -->
+        <input type="file" id="file-input" name="file" style="display: none;" accept=".png,.jpg,.jpeg,.pdf" multiple>
         <button type="button" id="upload-btn" class="btn">업로드</button>
       </form>
     </div>
@@ -25,6 +25,26 @@
   </div>
 
   <!-- 스크립트 -->
-  <script src="/js/main.js"></script>
+  <script>
+    // 업로드 버튼 클릭 시 파일 선택 창 열기
+    document.getElementById('upload-btn').addEventListener('click', function () {
+      document.getElementById('file-input').click();
+    });
+
+    // 파일 검증 (허용된 확장자만 선택 가능)
+    document.getElementById('file-input').addEventListener('change', function (event) {
+      const allowedExtensions = ['.png', '.jpg', '.jpeg', '.pdf'];
+      const files = event.target.files;
+
+      for (let i = 0; i < files.length; i++) {
+        const fileExtension = files[i].name.split('.').pop().toLowerCase();
+        if (!allowedExtensions.includes(`.${fileExtension}`)) {
+          alert('허용되지 않은 파일 형식입니다. 업로드 가능한 형식: PNG, JPG, JPEG, PDF');
+          event.target.value = ''; // 파일 입력 초기화
+          return;
+        }
+      }
+    });
+  </script>
 </body>
 </html>
